@@ -2,29 +2,28 @@ module.exports = {
   create(context) {
     return {
       Literal(node) {
-        // Check if the parent node is an import statement
-        if (node.parent.type !== 'ImportDeclaration') {
+        if (node.parent.type !== 'ImportDeclaration' && !(node.parent.type === 'VariableDeclarator' && node.parent.parent.kind === 'const')) {
           context.report({
             node,
-            message: `No magics: ${node.raw}. Refactor into a dedicated constant.`
+            message: `No magic primitives: '${node.raw}'. Refactor into a dedicated constant.`
           });
         }
       },
 
       ArrayExpression(node) {
-        if (!node.elements.length) {
+        if (!node.elements.length && !(node.parent.type === 'VariableDeclarator' && node.parent.parent.kind === 'const')) {
           context.report({
             node,
-            message: 'No magics. Refactor into a dedicated constant.'
+            message: 'No magic empty arrays. Refactor into a dedicated constant.'
           });
         }
       },
 
       ObjectExpression(node) {
-        if (!node.properties.length) {
+        if (!node.properties.length && !(node.parent.type === 'VariableDeclarator' && node.parent.parent.kind === 'const')) {
           context.report({
             node,
-            message: 'No magics. Refactor into a dedicated constant.'
+            message: 'No magic empty objects. Refactor into a dedicated constant.'
           });
         }
       }
