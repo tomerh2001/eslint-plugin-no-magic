@@ -1,0 +1,22 @@
+{
+  "name": "eslint-plugin-no-magics",
+  "version": "1.0.0",
+  "description": "ESLint plugin that disallows the use of magic primitives.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomerh2001/eslint-plugin-no-magics.git"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "no-magics",
+    "no-magic-primitives"
+  ],
+  "author": "Tomer Horowitz",
+  "license": "ISC"
+}
