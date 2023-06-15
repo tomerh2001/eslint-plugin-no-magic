@@ -2,17 +2,20 @@ module.exports = {
   create(context) {
     return {
       Literal(node) {
-        context.report({
-          node,
-          message: 'No magics allowed! Found a primitive.'
-        });
+        // Check if the parent node is an import statement
+        if (node.parent.type !== 'ImportDeclaration') {
+          context.report({
+            node,
+            message: `No magics: ${node.raw}. Refactor into a dedicated constant.`
+          });
+        }
       },
 
       ArrayExpression(node) {
         if (!node.elements.length) {
           context.report({
             node,
-            message: 'No magics allowed! Found an empty array.'
+            message: 'No magics. Refactor into a dedicated constant.'
           });
         }
       },
@@ -21,7 +24,7 @@ module.exports = {
         if (!node.properties.length) {
           context.report({
             node,
-            message: 'No magics allowed! Found an empty object.'
+            message: 'No magics. Refactor into a dedicated constant.'
           });
         }
       }
