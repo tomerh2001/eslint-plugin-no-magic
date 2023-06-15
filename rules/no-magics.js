@@ -5,7 +5,7 @@ module.exports = {
         if (node.parent.type !== 'ImportDeclaration' && !(node.parent.type === 'VariableDeclarator' && node.parent.parent.kind === 'const')) {
           context.report({
             node,
-            message: `No magic primitives: '${node.raw}'. Refactor into a dedicated constant.`
+            message: `No magics. Refactor into a dedicated constant.`
           });
         }
       },
@@ -14,7 +14,7 @@ module.exports = {
         if (!node.elements.length && !(node.parent.type === 'VariableDeclarator' && node.parent.parent.kind === 'const')) {
           context.report({
             node,
-            message: 'No magic empty arrays. Refactor into a dedicated constant.'
+            message: 'No magics. Refactor into a dedicated constant.'
           });
         }
       },
@@ -23,7 +23,7 @@ module.exports = {
         if (!node.properties.length && !(node.parent.type === 'VariableDeclarator' && node.parent.parent.kind === 'const')) {
           context.report({
             node,
-            message: 'No magic empty objects. Refactor into a dedicated constant.'
+            message: 'No magics. Refactor into a dedicated constant.'
           });
         }
       }
